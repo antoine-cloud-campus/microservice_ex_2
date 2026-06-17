@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Inventory</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <h1>Book Inventory</h1>
+
+    <% if (message) { %>
+        <p style="color: green;"><%= message %></p>
+    <% } %>
+
+    <ul>
+        <% (Array.isArray(books) ? books : []).forEach(function (book) { %>
+            <li>
+                <%= book.title %> - <%= book.author %>
+                <a href="/inventory/<%= book.id %>">Voir / Modifier</a>
+                <form action="/inventory/<%= book.id %>/delete" method="POST" style="display:inline">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+
+    <h2>Ajouter un livre :</h2>
+    <form action="/inventory/add" method="POST">
+        <label for="title">Titre</label>
+        <input type="text" id="title" name="title">
+
+        <label for="author">Auteur</label>
+        <input type="text" id="author" name="author">
+
+        <button type="submit">Ajouter</button>
+    </form>
+</body>
+
+</html>

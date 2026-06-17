@@ -1,0 +1,21 @@
+# Dépendances (réinstallables via npm install)
+node_modules/
+
+# Build LoopBack / TypeScript
+dist/
+*.tsbuildinfo
+.eslintcache
+
+# Variables d'environnement (souvent des secrets)
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Fichiers OS / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

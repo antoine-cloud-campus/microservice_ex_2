@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Paiements</title>
+  <link rel="stylesheet" href="/stylesheets/style.css"></head>
+<body>
+  <h1>Paiements</h1>
+  <% if (message) { %><p style="color:green"><%= message %></p><% } %>
+
+  <ul>
+    <% (Array.isArray(payments) ? payments : []).forEach(function (p) { %>
+      <li>
+        Commande <%= p.orderId %> — <%= p.amount %> € — <%= p.paymentMethod %> — <%= p.status %>
+        <a href="/payments/<%= p.id %>">Voir / Modifier</a>
+        <form action="/payments/<%= p.id %>/delete" method="POST" style="display:inline">
+          <button type="submit">Supprimer</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+
+  <h2>Nouveau paiement</h2>
+  <form action="/payments/add" method="POST">
+    <label>Commande (orderId) <input name="orderId"></label>
+    <label>Montant <input name="amount" type="number"></label>
+    <label>Date <input name="paymentDate"></label>
+    <label>Méthode <input name="paymentMethod"></label>
+    <label>Statut <input name="status"></label>
+    <button type="submit">Créer</button>
+  </form>
+</body>
+</html>

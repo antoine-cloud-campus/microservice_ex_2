@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Paiement</title>
+  <link rel="stylesheet" href="/stylesheets/style.css"></head>
+<body>
+  <h1>Modifier le paiement</h1>
+  <form action="/payments/<%= payment.id %>/edit" method="POST">
+    <label>Commande (orderId) <input name="orderId" value="<%= payment.orderId %>"></label>
+    <label>Montant <input name="amount" type="number" value="<%= payment.amount %>"></label>
+    <label>Date <input name="paymentDate" value="<%= payment.paymentDate %>"></label>
+    <label>Méthode <input name="paymentMethod" value="<%= payment.paymentMethod %>"></label>
+    <label>Statut <input name="status" value="<%= payment.status %>"></label>
+    <button type="submit">Mettre à jour</button>
+  </form>
+  <p><a href="/payments">← Retour</a></p>
+</body>
+</html>
