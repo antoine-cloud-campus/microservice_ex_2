@@ -1,0 +1,42 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    networks:
+      - bookstore-net
+    volumes:
+      - mongo-data:/data/db
+
+  loopback-bookstore:
+    build:
+      context: .
+    container_name: loopback-bookstore
+    environment:
+      - MONGO_HOST=mongo
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - bookstore-net
+
+  bookstore-web-app:
+    build:
+      context: ./bookstore-web-app
+    container_name: bookstore-web-app
+    environment:
+      - PORT=3000
+      - API_URL=http://loopback-bookstore:3000/books
+    ports:
+      - "3001:3000"
+    depends_on:
+      - loopback-bookstore
+    networks:
+      - bookstore-net
+
+networks:
+  bookstore-net:
+    driver: bridge
+
+volumes:
+  mongo-data:
