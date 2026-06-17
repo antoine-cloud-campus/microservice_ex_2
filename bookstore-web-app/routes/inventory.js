@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-const API_URL = process.env.API_URL || "http://127.0.0.1:3000/books";
+const API_URL = process.env.INVENTORY_API || "http://127.0.0.1:9001/inventory/books";
 
 router.get("/", function (req, res, next) {
     fetch(API_URL)

@@ -1,11 +1,11 @@
-import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
-import {juggler} from '@loopback/repository';
+import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
+import { juggler } from '@loopback/repository';
 
 const config = {
   name: 'mongo',
   connector: 'mongodb',
   url: '',
-  host: '127.0.0.1',
+  host: process.env.MONGO_HOST || '127.0.0.1', 
   port: 27017,
   user: '',
   password: '',
@@ -24,7 +24,7 @@ export class MongoDataSource extends juggler.DataSource
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.mongo', {optional: true})
+    @inject('datasources.config.mongo', { optional: true })
     dsConfig: object = config,
   ) {
     super(dsConfig);
